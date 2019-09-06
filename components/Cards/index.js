@@ -20,14 +20,20 @@
 
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
-    .then(res => { 
-           debugger
-  })
-  .catch(err => { 
-    document.body.innerText = error.message;
-  });
 
-  function cardCreator(){
+        .then(res => {
+            const data = res.data.articles[i];
+            const card = cardCreator(data);
+            const cards = document.querySelector('.cards-container');
+            cards.appendChild(card);
+          })
+
+  .catch(err => { 
+    
+  });
+  
+    
+   function cardCreator(){
 
     const divCard = document.createElement('div');
 
