@@ -21,7 +21,7 @@
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(res => { 
-
+           debugger
   })
   .catch(err => { 
     document.body.innerText = error.message;
