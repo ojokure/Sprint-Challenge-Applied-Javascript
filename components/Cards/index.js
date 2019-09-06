@@ -21,52 +21,77 @@
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 
-        .then(res => {
-            const data = res.data.articles[i];
-            const card = cardCreator(data);
-            const cards = document.querySelector('.cards-container');
-            cards.appendChild(card);
-          })
+    .then(res => {
+        const artObj = res.data.articles;
+        const arr = Object.values(artObj);
+        let artArr = [];
 
-  .catch(err => { 
+        for (let i = 0; i < arr.length; i++) {
+            // debugger
+            for (let j = 0; j < arr[i].length; j++) {
+                artArr.push(arr[i][j]);
+            }
+        }
+
+
+        // debugger
+        cardCreator(artArr);
+
+    })
+
+    .catch(err => {
+        error;
+    });
+
+
+
+
+function cardCreator(data) {
+
+    data.forEach((el) => {
+        // debugger
+
+        const divCard = document.createElement('div');
+
+        divCard.classList.add('card');
+
+        const divHeadline = document.createElement('div');
+
+        divHeadline.textContent = el.headline;
+
+        divHeadline.classList.add('headline');
+
+        const divAuthor = document.createElement('div');
+
+        divAuthor.classList.add('author');
+
+        const divImage = document.createElement('div');
+
+        divImage.classList.add('img-container');
+
+        const authorImg = document.createElement('img');
+
+        authorImg.setAttribute('src', el.authorPhoto);
+
+        const spanAuthorsName = document.createElement('span');
+
+        spanAuthorsName.textContent = `By ${el.authorName}`;
+
+        divImage.appendChild(authorImg);
+
+        divAuthor.appendChild(divImage);
+
+        divAuthor.appendChild(spanAuthorsName);
+
+        divHeadline.appendChild(divAuthor);
+
+        divCard.appendChild(divHeadline);
+
+        // debugger
+
+        document.querySelector('.cards-container').appendChild(divCard);
     
-  });
-  
-    
-   function cardCreator(){
 
-    const divCard = document.createElement('div');
+    })
 
-    divCard.classList.add('card');
-
-    const divHeadline = document.createElement('div');
-
-    divHeadline.classList.add('headline');
-
-    const divAuthor = document.createElement('div');
-
-    divAuthor.classList.add('author');
-
-    const divImage = document.createElement('div');
-
-    divImage.classList.add('img-container');
-
-    const authorImg = document.createElement('img');
-
-    authorImg.setAttribute('src')
-    
-    const spanAuthorsName = document.createElement('span');
-
-    divImage.appendChild(authorImg);
-
-    divAuthor.appendChild(divImage);
-
-    divAuthor.appendChild(spanAuthorsName);
-
-    divHeadline.appendChild(divAuthor);
-
-    divCard.appendChild(divHeadline);
-
-    return divCard
-
-  }
+}
